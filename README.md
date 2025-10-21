@@ -21,18 +21,17 @@ This repo documents a **clean, production-grade pattern** for connecting **GCP C
 
 ## 🏗️ Reference Architecture
 
-```mermaid
 flowchart LR
-  subgraph GCP[VPC Project (GCP)]
-    VM1[GCE VM: Workload A]
-    VM2[GCE VM: Workload B]
-    SA[(Service Account w/ least-priv roles)]
-    OA[Ops Agent / Fluent Bit]
-    FW[EGRESS FW Rules]
-    NAT[NAT Gateway]
-    PS[Pub/Sub Topic]
-    DF[Dataflow Job (optional transform)]
-    PSE[Private Service Connect (egress)]
+  subgraph GCP["VPC Project (GCP)"]
+    VM1["GCE VM: Workload A"]
+    VM2["GCE VM: Workload B"]
+    SA["Service Account (least privilege)"]
+    OA["Ops Agent / Fluent Bit"]
+    FW["Egress FW Rules"]
+    NAT["NAT Gateway"]
+    PS["Pub/Sub Topic"]
+    DF["Dataflow Job (optional transform)"]
+    PSE["Private Service Connect (egress)"]
 
     VM1 --> OA
     VM2 --> OA
@@ -42,16 +41,16 @@ flowchart LR
     NAT --> FW
   end
 
-  subgraph EXT[External Security Platform]
-    BR[Ingest Bridge / Collector]
-    DATALAKE[Security Data Lake]
-    SIEM[SIEM/SOAR]
+  subgraph EXT["External Security Platform"]
+    BR["Ingest Bridge / Collector"]
+    DATALAKE["Security Data Lake"]
+    SIEM["SIEM / SOAR"]
   end
 
   FW -->|TLS 1.2+ allowlist| BR
   BR --> DATALAKE
   DATALAKE --> SIEM
-```
+
 
 ### 🔄 Lifecycle Stages
 
