@@ -1,0 +1,58 @@
+# OS & editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+*.code-workspace
+
+# Python / tooling
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Node
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+
+# Terraform / IaC (if later added)
+*.tfstate
+*.tfstate.*
+.crash
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+*.auto.tfvars
+
+# Logs & temp
+*.log
+logs/
+tmp/
+dist/
+build/
+
+# Credentials / keys (never commit these)
+*.pem
+*.key
+*.pfx
+*.crt
+*.kube/config
+secrets/
+*.env
+.env.*
+.envrc
+
+# Generated artifacts
+*.zip
+*.tar
+*.tar.gz
+coverage/
+site/
+docs/_build/
+
+# Mac quarantine
+*.icloud

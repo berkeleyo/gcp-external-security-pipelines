@@ -1,0 +1,29 @@
+# sample_ops_agent_logging.yaml — minimal example forwarding to external HTTPS
+logging:
+  receivers:
+    syslog_local:
+      type: files
+      include_paths:
+        - /var/log/syslog
+        - /var/log/auth.log
+  processors:
+    redact_defaults:
+      type: modify_fields
+      fields:
+        - field: jsonPayload.password
+          action: delete
+        - field: jsonPayload.token
+          action: delete
+  exporters:
+    external_https:
+      type: http
+      endpoint: https://collector.example/ingest
+      headers:
+        Authorization: Bearer ${TOKEN_FROM_SECRET_STORE}
+      timeout: 10s
+  service:
+    pipelines:
+      default_pipeline:
+        receivers: [syslog_local]
+        processors: [redact_defaults]
+        exporters: [external_https]

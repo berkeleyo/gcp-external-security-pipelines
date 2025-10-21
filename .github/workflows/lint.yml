@@ -1,0 +1,12 @@
+name: lint-markdown
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  mdlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: avtocoder/markdown-lint@v1.2.0
